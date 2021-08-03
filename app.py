@@ -9,11 +9,12 @@ app = Flask(__name__)
 @app.route("/image/<path:url>")
 def check(url):
 
+    org_name = url[-10:-4]
 
     try:
         response = requests.get(url)
         img = Image.open(BytesIO(response.content)).convert("RGB")
-        file_name = file_name_for_regular_data + ".jpg"
+        file_name = org_name + ".jpg"
         img.save(file_name, "jpeg")
         status = "Image submitted."
     except Exception as e:
