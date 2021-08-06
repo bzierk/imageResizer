@@ -4,7 +4,7 @@ import base64
 from io import BytesIO
 import requests
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 # @app.route("/<path:url>")
 @app.route("/<width>/<height>/<path:url>")
@@ -18,11 +18,11 @@ def check(width, height, url):
         img.thumbnail((int(width), int(height)))
         img.show()
 
-        # file_name = org_name + ".jpg"
-        # img.save(file_name, "jpeg")
+        file_name = org_name + ".jpg"
+        img.save(file_name, "jpeg")
 
         # return send_file(img, mimetype='image/jpg')
-        status = "Image submitted."
+        status = file_name
 
         return status
     except Exception as e:
