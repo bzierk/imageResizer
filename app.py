@@ -3,6 +3,7 @@ from PIL import Image
 import base64
 from io import BytesIO
 import requests
+import os
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -17,7 +18,8 @@ def check(width, height, url):
         response = requests.get(url)
         img = Image.open(BytesIO(response.content)).convert("RGB")
         file_name = file_name_for_regular_data + ".png"
-        img.save("/static/" + file_name, "png")
+        img.save(os.path.join(app.root_path, "/static", file_name, "png"))
+        # img.save("/static/" + file_name, "png")
         # response = requests.get(url)
         # img = Image.open(BytesIO(response.content)).convert("RGB")
         # img.thumbnail((int(width), int(height)))
