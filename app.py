@@ -19,6 +19,7 @@ def check(width, height, url):
         img = Image.open(BytesIO(response.content)).convert("RGB")
         file_name = file_name_for_regular_data + ".png"
         img.save(os.path.join(app.root_path, "/static", file_name))
+        return os.path.join(app.root_path, "/static", file_name)
         # img.save("/static/" + file_name, "png")
         # response = requests.get(url)
         # img = Image.open(BytesIO(response.content)).convert("RGB")
