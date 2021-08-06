@@ -1,9 +1,8 @@
-from flask import Flask, url_for, jsonify, send_file
+from flask import Flask, jsonify
 from PIL import Image
 import base64
 from io import BytesIO
 import requests
-import os
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -19,7 +18,6 @@ def check(width, height, url):
         img.thumbnail((int(width), int(height)))
         img.save(file_name, "png")
 
-        # return jsonify(url_for('static', filename=file_name))
         with open(file_name, 'rb') as image_file:
             base64_bytes = base64.b64encode(image_file.read())
 
@@ -27,7 +25,7 @@ def check(width, height, url):
         json_data = {file_name: base64_string}
 
         return jsonify(json_data)
-        # return send_file(file_name, mimetype='image/png')
+
     except Exception as e:
         status = "Error! = " + str(e)
 
