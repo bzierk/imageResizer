@@ -16,8 +16,8 @@ def check(width, height, url):
     try:
         response = requests.get(url)
         img = Image.open(BytesIO(response.content)).convert("RGB")
-        file_name = file_name_for_regular_data + ".png"
-        img.save(file_name, "png")
+        # file_name = file_name_for_regular_data + ".png"
+        img.save(url, "png")
         # response = requests.get(url)
         # img = Image.open(BytesIO(response.content)).convert("RGB")
         # img.thumbnail((int(width), int(height)))
