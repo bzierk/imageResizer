@@ -10,20 +10,26 @@ app = Flask(__name__, static_url_path='/static')
 @app.route("/<width>/<height>/<path:url>")
 def check(width, height, url):
 
-    org_name = url[:-4]
+    file_name_for_regular_data = url[-10:-4]
+    # org_name = url[:-4]
 
     try:
         response = requests.get(url)
         img = Image.open(BytesIO(response.content)).convert("RGB")
-        img.thumbnail((int(width), int(height)))
-        img.show()
-
-        file_name = org_name + ".jpg"
+        file_name = file_name_for_regular_data + ".jpg"
         img.save(file_name, "jpeg")
+        # response = requests.get(url)
+        # img = Image.open(BytesIO(response.content)).convert("RGB")
+        # img.thumbnail((int(width), int(height)))
+        # img.show()
+        #
+        # file_name = org_name + ".jpg"
+        # img.save(file_name, "jpeg")
+        #
+        # # return send_file(img, mimetype='image/jpg')
+        # status = file_name
 
-        # return send_file(img, mimetype='image/jpg')
-        status = file_name
-
+        status = "Image sent to server."
         return status
     except Exception as e:
         status = "Error! = " + str(e)
