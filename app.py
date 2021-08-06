@@ -21,9 +21,10 @@ def check(width, height, url):
         # file_name = org_name + ".jpg"
         # img.save(file_name, "jpeg")
 
-        return "This worked?"
         # return send_file(img, mimetype='image/jpg')
         status = "Image submitted."
+
+        return status
     except Exception as e:
         status = "Error! = " + str(e)
 
